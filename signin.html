@@ -209,10 +209,10 @@
                 // Otherwise redirect to the deployed design page.
                 const host = window.location.hostname;
                 if (host === 'localhost' || host === '127.0.0.1') {
-                    // local dev server (uses base /Ecotex-final/)
-                    window.location.href = 'http://localhost:8080/Ecotex-final/design.html';
+                    // local dev: open the lovable.ai app running on vite dev server
+                    window.location.href = 'http://localhost:8080/';
                 } else {
-                    // deployed or static host — use the repo path
+                    // deployed or static host — open the deployed design page as fallback
                     window.location.href = '/Ecotex-final/design.html';
                 }
                 return;
