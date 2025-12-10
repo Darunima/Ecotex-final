@@ -74,23 +74,23 @@
     </div>
 
     <script>
-        // After showing the loading UI, attempt to open the local lovable.ai app.
-        // Try to open in a new tab (less likely to be blocked if triggered by user click),
-        // otherwise fall back to navigating the current page.
-        setTimeout(function() {
-            var localUrl = 'http://localhost:8080/';
-            try {
-                var w = window.open(localUrl, '_blank');
-                if (!w) {
-                    // popup blocked, navigate current window
-                    window.location.href = localUrl;
+        // After showing loading UI, open the hosted lovable.ai model project.
+        (function() {
+            var delayBeforeOpen = 5000; // ms
+            var modelUrl = 'https://lovable.dev/projects/ef4ef4eb-a9cd-4e94-8fd0-c3e388802ce1';
+
+            setTimeout(function() {
+                try {
+                    var w = window.open(modelUrl, '_blank');
+                    if (!w) {
+                        // popup blocked, navigate current window
+                        window.location.href = modelUrl;
+                    }
+                } catch (e) {
+                    window.location.href = modelUrl;
                 }
-                // Optionally keep showing loading page; do nothing else here.
-            } catch (e) {
-                // On error, navigate current window
-                window.location.href = localUrl;
-            }
-        }, 5000); // 5 seconds
+            }, delayBeforeOpen);
+        })();
     </script>
 </body>
 </html>
