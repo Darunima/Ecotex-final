@@ -74,8 +74,22 @@
     </div>
 
     <script>
+        // After showing the loading UI, attempt to open the local lovable.ai app.
+        // Try to open in a new tab (less likely to be blocked if triggered by user click),
+        // otherwise fall back to navigating the current page.
         setTimeout(function() {
-            window.location.href = 'http://localhost:8080/'; // Change if needed
+            var localUrl = 'http://localhost:8080/';
+            try {
+                var w = window.open(localUrl, '_blank');
+                if (!w) {
+                    // popup blocked, navigate current window
+                    window.location.href = localUrl;
+                }
+                // Optionally keep showing loading page; do nothing else here.
+            } catch (e) {
+                // On error, navigate current window
+                window.location.href = localUrl;
+            }
         }, 5000); // 5 seconds
     </script>
 </body>

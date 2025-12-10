@@ -201,15 +201,10 @@
             // check credentials
             const valid = (username === 'Daruni' && password === '2622') || (username === 'Thoufik' && password === '8489');
             if (valid) {
-                // Open the lovable.ai app running on the local vite dev server.
-                // Use window.open with user click context to avoid popup blocking.
-                try {
-                    window.open('http://localhost:8080/', '_blank');
-                } catch (e) {
-                    // Fallback to same-window navigation if popup blocked
-                    window.location.href = 'http://localhost:8080/';
-                }
+                // Show the loading page first, then it will open the local app.
+                window.location.href = 'loading.html';
                 return;
+            }
             } else {
                 alert('Incorrect Username or Password');
                 document.getElementById('forgotPassword').style.display = 'block';
