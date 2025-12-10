@@ -1,0 +1,4 @@
+- [x] Create sample.html with links to signin.html and freetrial.html
+- [ ] Create signin.html with signin form redirecting to design.html
+- [ ] Create freetrial.html with free trial form redirecting to design.html
+- [ ] Test navigation and redirects

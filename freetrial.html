@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GENTEX Plans</title>
+
+  <style>
+    body {
+      font-family: 'Merriweather', serif;
+      background: linear-gradient(135deg, #141e30, #2a6c56);
+      margin: 0;
+      padding: 0;
+    }
+    .plans-container {
+      text-align: center;
+      padding: 40px 0;
+      color: #03f484;
+    }
+    .plans-header {
+      font-size: 2.2em;
+      color: #ffffff;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .plans-subheader {
+      font-size: 1.1em;
+      margin-bottom: 40px;
+    }
+    .plan-toggle {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+      align-items: center;
+      gap: 12px;
+    }
+    .plan-toggle label {
+      font-size: 1em;
+      color: #fff;
+      margin-right: 10px;
+    }
+    .plan-cards {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .plan-card {
+      background-color: rgba(0, 0, 0, 0.8);
+      border-radius: 12px;
+      width: 270px;
+      padding: 20px;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6);
+      transition: 0.3s;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .plan-card:hover {
+      transform: translateY(-10px);
+    }
+    .plan-title {
+      font-size: 1.4em;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .plan-price {
+      font-size: 1.8em;
+      color: #03f484;
+      margin-bottom: 10px;
+    }
+    .plan-duration {
+      font-size: 0.9em;
+      margin-bottom: 15px;
+    }
+    .plan-description {
+      font-size: 0.9em;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .plan-button {
+      position: relative;
+      display: inline-block;
+      padding: 10px 20px;
+      color: #03f484;
+      font-size: 18px;
+      text-decoration: none;
+      text-transform: uppercase;
+      overflow: hidden;
+      transition: 0.5s;
+      margin-top: 20px;
+      letter-spacing: 4px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+    }
+    .plan-button:hover {
+      background: #03f484;
+      color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 5px #03f484, 0 0 25px #03f484, 0 0 50px #03f484, 0 0 100px #03f484;
+    }
+    .plan-button span {
+      position: absolute;
+      display: block;
+    }
+    .plan-button span:nth-child(1) {
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #03f484);
+      animation: btn-anim1 1s linear infinite;
+    }
+    @keyframes btn-anim1 {
+      0% { left: -100%; }
+      50%, 100% { left: 100%; }
+    }
+    .plan-button span:nth-child(2) {
+      top: -100%;
+      right: 0;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, #03f484);
+      animation: btn-anim2 1s linear infinite;
+      animation-delay: 0.25s;
+    }
+    @keyframes btn-anim2 {
+      0% { top: -100%; }
+      50%, 100% { top: 100%; }
+    }
+    .plan-button span:nth-child(3) {
+      bottom: 0;
+      right: 100%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(270deg, transparent, #03f484);
+      animation: btn-anim3 1s linear infinite;
+      animation-delay: 0.5s;
+    }
+    @keyframes btn-anim3 {
+      0% { right: -100%; }
+      50%, 100% { right: 100%; }
+    }
+    .plan-button span:nth-child(4) {
+      bottom: -100%;
+      left: 0;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(360deg, transparent, #03f484);
+      animation: btn-anim4 1s linear infinite;
+      animation-delay: 0.75s;
+    }
+    @keyframes btn-anim4 {
+      0% { bottom: -100%; }
+      50%, 100% { bottom: 100%; }
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      margin-top: 30px;
+    }
+    .footer-links a {
+      color: #03f484;
+      text-decoration: none;
+      font-size: 1.1em;
+    }
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+    /* New 6-Month Section Styles */
+    .six-month-section {
+      margin-top: 50px;
+      padding-top: 30px;
+      border-top: 1px solid #03f484;
+    }
+    .six-month-section .plan-card {
+      border: 2px solid #03f484;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    /* Additional clickable content */
+    .additional-content {
+      margin-top: 60px;
+      display: flex;
+      justify-content: center;
+      gap: 100px;
+      flex-wrap: wrap;
+    }
+    .additional-content div {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 15px;
+      width: 270px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+      cursor: pointer;
+      transition: box-shadow 0.3s ease;
+      color: #fff;
+    }
+    .additional-content div:hover {
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.8);
+    }
+    .additional-content div h4 {
+      font-size: 1.2em;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .additional-content div p {
+      font-size: 0.9em;
+      color: #03f484;
+    }
+    /* Black Background Box Section */
+    .black-box-section {
+      background-color: #000;
+      margin-top: 60px;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .black-box-title {
+      font-size: 2.5em;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .black-box-description {
+      font-size: 1.2em;
+      color: #03f484;
+      margin-bottom: 30px;
+    }
+    .black-box-button {
+      background-color: #000000;
+      display: inline-block;
+      overflow: hidden;
+      transition: 0.5s;
+      color: white;
+      padding: 15px 30px;
+      font-size: 1.1em;
+      border-radius: 6px;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-weight: bold;
+      background: transparent;
+    }
+    .black-box-button:hover {
+      background: #03f484;
+      color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 5px #03f484, 0 0 25px #03f484, 0 0 50px #03f484, 0 0 100px #03f484;
+    }
+
+    /* Responsive */
+    @media (max-width: 760px) {
+      .plan-cards { gap: 12px; }
+      .additional-content { gap: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="plans-container">
+    <div class="plans-header">Our Subscription Plans</div>
+    <div class="plans-subheader">Select a plan that suits your needs.</div>
+
+    <div class="plan-toggle">
+      <label for="monthly">Monthly</label>
+      <input type="checkbox" id="plan-toggle" checked>
+      <label for="yearly">Yearly (Save 25%)</label>
+    </div>
+
+    <div class="plan-cards">
+      <div class="plan-card" data-base-price="25">
+        <div class="plan-title">Student</div>
+        <div class="plan-price">$25</div>
+        <div class="plan-duration">USD / monthly</div>
+        <div class="plan-description">Tax, VAT not included.</div>
+        <button class="plan-button" onclick="redirectToSignUp()">
+          <span></span><span></span><span></span><span></span>Get Started
+        </button>
+      </div>
+
+      <div class="plan-card" data-base-price="50">
+        <div class="plan-title">Professional</div>
+        <div class="plan-price">$50</div>
+        <div class="plan-duration">USD / monthly</div>
+        <div class="plan-description">Tax, VAT not included.</div>
+        <button class="plan-button" onclick="redirectToSignUp()">
+          <span></span><span></span><span></span><span></span>Get Started
+        </button>
+      </div>
+
+      <div class="plan-card" data-base-price="">
+        <div class="plan-title">Enterprise</div>
+        <div class="plan-price">Custom Pricing</div>
+        <div class="plan-description">Comprehensive business solution.</div>
+        <button class="plan-button" onclick="linkedin()">
+          <span></span><span></span><span></span><span></span>Contact Us
+        </button>
+      </div>
+    </div>
+
+    <!-- 6-Month Plan Section -->
+    <div class="six-month-section">
+      <div class="plan-cards">
+        <div class="plan-card" data-base-price="22.5">
+          <div class="plan-title">Student (6 Months)</div>
+          <div class="plan-price">$22.50</div>
+          <div class="plan-duration">USD / monthly</div>
+          <div class="plan-description">Save $15 for 6 months.</div>
+          <button class="plan-button" onclick="redirectToSignUp()"><span></span><span></span><span></span><span></span>Get Started</button>
+        </div>
+        <div class="plan-card" data-base-price="45">
+          <div class="plan-title">Professional (6 Months)</div>
+          <div class="plan-price">$45</div>
+          <div class="plan-duration">USD / monthly</div>
+          <div class="plan-description">Save $30 for 6 months.</div>
+          <button class="plan-button" onclick="redirectToSignUp()"><span></span><span></span><span></span><span></span>Get Started</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Links -->
+    <div class="footer-links">
+      <a href="#">Product Features</a>
+      <a href="#">Pricing Details</a>
+      <a href="#">Contact Us</a>
+    </div>
+
+    <!-- Additional Clickable Content -->
+    <div class="additional-content">
+      <div onclick="window.location.href='features.html'">
+        <h4>Explore Our AI Technology</h4>
+        <p>See how AI can enhance your textile designs.</p>
+      </div>
+      <div onclick="window.location.href='community.html'">
+        <h4>Join the Community</h4>
+        <p>Be part of a global network of eco-friendly designers.</p>
+      </div>
+      <div onclick="window.location.href='enterprise.html'">
+        <h4>Custom Design Support</h4>
+        <p>Learn about our professional design services for enterprises.</p>
+      </div>
+    </div>
+
+    <!-- Black Background Box Section -->
+    <div class="black-box-section">
+      <div class="black-box-title">Get Started with GENTEX</div>
+      <div class="black-box-description">Unlock the future of eco-friendly textile design with AI-driven solutions.</div>
+      <div class="black-box-description">Email: gentex@gmail.com</div>
+      <div class="black-box-description">Contact us via office number: 6381963142</div>
+      <button class="black-box-button" id="signup" onclick="Signin()">Sign Up Now</button>
+    </div>
+  </div>
+
+  <!-- Scripts at the end -->
+  <script>
+    // Wait until DOM ready
+    document.addEventListener('DOMContentLoaded', function () {
+      // Plan toggle logic: checkbox toggles monthly <-> yearly (yearly = monthly * 12 * 0.75)
+      const planToggle = document.getElementById('plan-toggle');
+      const planCards = Array.from(document.querySelectorAll('.plan-card'));
+
+      // Helper: format price as $X or return text if not numeric
+      function formatPrice(value) {
+        if (value === null || value === undefined || value === '') return '';
+        const n = Number(value);
+        if (Number.isNaN(n)) return '';
+        return '$' + (Math.round(n * 100) / 100).toFixed(2);
+      }
+
+      function updatePrices() {
+        const yearly = planToggle.checked === false; // if unchecked, we show Yearly? In your original checked meant monthly; keep that: checked = monthly
+        // we'll interpret: checked = monthly, unchecked = yearly
+        planCards.forEach(card => {
+          const base = card.getAttribute('data-base-price'); // base is monthly price number or empty
+          const priceEl = card.querySelector('.plan-price');
+          const durEl = card.querySelector('.plan-duration');
+
+          if (!base) {
+            // Custom pricing - leave as-is
+            priceEl.textContent = priceEl.textContent; // no-op
+            if (durEl) durEl.textContent = durEl.textContent || '';
+            return;
+          }
+
+          const baseNum = Number(base);
+          if (Number.isNaN(baseNum)) return;
+
+          if (planToggle.checked) {
+            // Monthly view
+            priceEl.textContent = formatPrice(baseNum);
+            if (durEl) durEl.textContent = 'USD / monthly';
+          } else {
+            // Yearly view: monthly * 12 * 0.75 (25% off)
+            const yearlyPrice = baseNum * 12 * 0.75;
+            priceEl.textContent = formatPrice(yearlyPrice);
+            if (durEl) durEl.textContent = 'USD / yearly';
+          }
+        });
+      }
+
+      // Initialize (default: checked = monthly)
+      updatePrices();
+
+      // Attach change event
+      planToggle.addEventListener('change', updatePrices);
+
+      // Routing functions
+      window.redirectToSignUp = function () {
+        // open loading.html from same folder
+        window.location.href = 'loading.html';
+      };
+
+      window.Signin = function () {
+        // also open signup or signin? You asked earlier to go to signup from this button.
+        // If you want it to go to signup page, keep as below. If you want to go to signin, change to signin.html
+        window.location.href = 'signup=.html';
+      };
+
+      window.linkedin = function () {
+        window.location.href = "https://www.instagram.com/royal_beast_boy?igsh=MXc1YTB0Z3JqMTdlZQ==";
+      };
+    });
+  </script>
+</body>
+</html>
