@@ -205,17 +205,10 @@
             // check credentials
             const valid = (username === 'Daruni' && password === '2622') || (username === 'Thoufik' && password === '8489');
             if (valid) {
-                // If running locally, redirect to local dev server path.
-                // Otherwise redirect to the deployed design page.
-                const host = window.location.hostname;
-                if (host === 'localhost' || host === '127.0.0.1') {
-                    // local dev: open the lovable.ai app running on vite dev server
-                    window.location.href = 'http://localhost:8080/';
-                } else {
-                    // deployed or static host — open the deployed design page as fallback
-                    window.location.href = '/Ecotex-final/design.html';
-                }
+                // Show the loading page first, then it will open the local app.
+                window.location.href = 'loading.html';
                 return;
+            }
             } else {
                 alert('Incorrect Username or Password');
                 document.getElementById('forgotPassword').style.display = 'block';
