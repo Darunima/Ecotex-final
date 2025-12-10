@@ -198,10 +198,20 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            if (username === 'Daruni' && password === '2622') {
-                window.location.href = 'loading.html'; // Redirect to loading page
-            } else if (username === 'Thoufik' && password === '8489') {
-                window.location.href = 'loading.html';
+            // check credentials
+            const valid = (username === 'Daruni' && password === '2622') || (username === 'Thoufik' && password === '8489');
+            if (valid) {
+                // If running locally, redirect to local dev server path.
+                // Otherwise redirect to the deployed design page.
+                const host = window.location.hostname;
+                if (host === 'localhost' || host === '127.0.0.1') {
+                    // local dev server (uses base /Ecotex-final/)
+                    window.location.href = 'http://localhost:8080/Ecotex-final/design.html';
+                } else {
+                    // deployed or static host — use the repo path
+                    window.location.href = '/Ecotex-final/design.html';
+                }
+                return;
             } else {
                 alert('Incorrect Username or Password');
                 document.getElementById('forgotPassword').style.display = 'block';
